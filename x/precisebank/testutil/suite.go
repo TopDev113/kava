@@ -87,3 +87,11 @@ func (suite *Suite) Commit() {
 	// update ctx
 	suite.Ctx = suite.App.NewContext(false, header)
 }
+
+func (suite *Suite) LogReserves() {
+	fractionalBalSum := suite.Keeper.GetTotalSumFractionalBalances(suite.Ctx)
+	remainderAmount := suite.Keeper.GetRemainderAmount(suite.Ctx)
+
+	suite.T().Logf("fractional balances sum: %s", fractionalBalSum.String())
+	suite.T().Logf("remainder amount: %s", remainderAmount.String())
+}
